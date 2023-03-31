@@ -44,11 +44,11 @@ rm -rf chroot-bullseye/var/lib/apt/lists/*
 rm -rf chroot-bullseye/usr/share/locale/*
 rm -rf chroot-bullseye/usr/share/man/*
 
-mkdir -p /usr/share/doc.new
-for i in /usr/share/doc/*/copyright; do echo "${i}" | sed -e "s/^\/usr\/share\/doc\///" | xargs -i dirname "{}" | xargs -i mkdir -p /usr/share/doc.new/{}; done
-for i in /usr/share/doc/*/copyright; do echo "${i}" | sed -e "s/^\/usr\/share\/doc\///" | xargs -i cp /usr/share/doc/{} /usr/share/doc.new/{}; done
-rm -rf /usr/share/doc
-mv /usr/share/doc.new /usr/share/doc
+mkdir -p chroot-bullseye/usr/share/doc.new
+for i in chroot-bullseye/usr/share/doc/*/copyright; do echo "${i}" | sed -e "s/^chroot-bullseye\/usr\/share\/doc\///" | xargs -i dirname "{}" | xargs -i mkdir -p chroot-bullseye/usr/share/doc.new/{}; done
+for i in chroot-bullseye/usr/share/doc/*/copyright; do echo "${i}" | sed -e "s/^chroot-bullseye\/usr\/share\/doc\///" | xargs -i cp chroot-bullseye/usr/share/doc/{} chroot-bullseye/usr/share/doc.new/{}; done
+rm -rf chroot-bullseye/usr/share/doc
+mv chroot-bullseye/usr/share/doc.new chroot-bullseye/usr/share/doc
 
 cd chroot-bullseye
 tar cpf /docker/debian/bullseye.tar .
