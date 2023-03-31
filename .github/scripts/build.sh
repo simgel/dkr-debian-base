@@ -92,5 +92,5 @@ docker rmi "$BIID" >>build.log 2>&1
 # create container
 
 IMAGE="ghcr.io/simgel/dkr-debian-base:bullseye"
-( docker import bullseye.tar "$IMAGE" ) || exit 1
+( docker import --change "CMD /bin/bash" bullseye.tar "$IMAGE" ) || exit 1
 ( docker push "$IMAGE" ) || exit 1
