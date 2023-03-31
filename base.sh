@@ -34,7 +34,9 @@ chroot chroot-bullseye apt upgrade -qqy
 date -R > chroot-bullseye/etc/docker_debian_ts
 chmod 644 chroot-bullseye/etc/docker_debian_ts
 
+# minimize image
 rm -rf chroot-bullseye/var/cache/apt/*
+rm -rf chroot-bullseye/var/lib/apt/lists/*
 
 cd chroot-bullseye
 tar cpf /docker/debian/bullseye.tar .
