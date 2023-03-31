@@ -32,6 +32,7 @@ trap cleanup EXIT
 
 
 # BUILD --------------
+IMAGE="ghcr.io/simgel/dkr-debian-base:bullseye"
 
 ( echo "${SCR_GIT_TOKEN}" | docker login -u ${GITHUB_ACTOR} --password-stdin ghcr.io ) || exit 1
 
@@ -42,7 +43,7 @@ if [[ "$1" == "schedule" ]]; then
 
     RNDTAG=$(hexdump -n 16 -e '4/4 "%08x"' /dev/urandom)
     
-    ( docker pull ghcr.io/simgel/dkr-debian-base:bullseye >>build.log 2>&1 ) || exit 1
+    ( docker pull "$IMAGE" >>build.log 2>&1 ) || exit 1
 
     ( docker build --iidfile build.iid -t "$RNDTAG" -f Dockerfile.check . >>build.log 2>&1 ) || exit 1
 
@@ -57,7 +58,7 @@ if [[ "$1" == "schedule" ]]; then
     docker rm "$BCID" >>build.log 2>&1
     docker rmi "$BIID" >>build.log 2>&1
 
-    docker rmi ghcr.io/simgel/dkr-debian-base:bullseye
+    docker rmi "$IMAGE"
 
     if [[ "$ucount" == "0" ]]; then
         echo ">> no update required"
@@ -91,6 +92,5 @@ docker rmi "$BIID" >>build.log 2>&1
 
 # create container
 
-IMAGE="ghcr.io/simgel/dkr-debian-base:bullseye"
 ( docker import --change "CMD /bin/bash" bullseye.tar "$IMAGE" ) || exit 1
 ( docker push "$IMAGE" ) || exit 1
