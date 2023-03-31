@@ -38,5 +38,17 @@ chmod 644 chroot-bullseye/etc/docker_debian_ts
 rm -rf chroot-bullseye/var/cache/apt/*
 rm -rf chroot-bullseye/var/lib/apt/lists/*
 
+# further minimization
+# see https://github.com/debuerreotype/debuerreotype/blob/master/scripts/.slimify-excludes
+# see https://github.com/debuerreotype/debuerreotype/blob/master/scripts/.slimify-includes
+rm -rf chroot-bullseye/usr/share/locale/*
+rm -rf chroot-bullseye/usr/share/man/*
+
+mkdir -p /usr/share/doc.new
+for i in /usr/share/doc/*/copyright; do echo "${i}" | sed -e "s/^\/usr\/share\/doc\///" | xargs -i dirname "{}" | xargs -i mkdir -p /usr/share/doc.new/{}; done
+for i in /usr/share/doc/*/copyright; do echo "${i}" | sed -e "s/^\/usr\/share\/doc\///" | xargs -i cp /usr/share/doc/{} /usr/share/doc.new/{}; done
+rm -rf /usr/share/doc
+mv /usr/share/doc.new /usr/share/doc
+
 cd chroot-bullseye
 tar cpf /docker/debian/bullseye.tar .
