@@ -14,7 +14,7 @@ apt upgrade -qqy
 apt install -qqy debootstrap
 
 
-# create base tar
+# create base layout
 mkdir -p /docker/debian
 cd /docker/debian
 
@@ -34,7 +34,7 @@ chroot chroot-bullseye apt upgrade -qqy
 date -R > chroot-bullseye/etc/docker_debian_ts
 chmod 644 chroot-bullseye/etc/docker_debian_ts
 
-# minimize image
+# minimize
 rm -rf chroot-bullseye/var/cache/apt/*
 rm -rf chroot-bullseye/var/lib/apt/lists/*
 
@@ -50,5 +50,10 @@ for i in chroot-bullseye/usr/share/doc/*/copyright; do echo "${i}" | sed -e "s/^
 rm -rf chroot-bullseye/usr/share/doc
 mv chroot-bullseye/usr/share/doc.new chroot-bullseye/usr/share/doc
 
+# unqiue id
+mkdir -p chroot-bullseye/opt/dkr-image/simgel/
+hexdump -n 32 -e '4/4 "%8x"' /dev/urandom > chroot-bullseye/opt/dkr-image/simgel/dkr-debian-base.id
+
+# final tar for image creation
 cd chroot-bullseye
 tar cpf /docker/debian/bullseye.tar .
