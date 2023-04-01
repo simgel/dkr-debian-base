@@ -37,6 +37,7 @@ chroot chroot-bullseye apt install -qqy bsdmainutils
 # minimize
 rm -rf chroot-bullseye/var/cache/apt/*
 rm -rf chroot-bullseye/var/lib/apt/lists/*
+rm -rf chroot-bullseye/var/log/*
 
 # further minimization
 # see https://github.com/debuerreotype/debuerreotype/blob/master/scripts/.slimify-excludes
