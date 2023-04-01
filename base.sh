@@ -8,6 +8,8 @@ echo "deb http://mirror.leaseweb.net/debian bullseye main contrib" > /etc/apt/so
 echo "deb http://deb.debian.org/debian-security bullseye-security main contrib" >> /etc/apt/sources.list
 echo "deb http://mirror.leaseweb.net/debian bullseye-updates main contrib" >> /etc/apt/sources.list
 
+echo "nameserver 9.9.9.9" > /etc/resolv.conf
+
 # install debootstrap
 apt update -qq
 apt upgrade -qqy
@@ -31,9 +33,6 @@ echo "deb http://mirror.leaseweb.net/debian bullseye-updates main contrib" >> ch
 chroot chroot-bullseye apt update -qq
 chroot chroot-bullseye apt upgrade -qqy
 chroot chroot-bullseye apt install -qqy bsdmainutils
-
-date -R > chroot-bullseye/etc/docker_debian_ts
-chmod 644 chroot-bullseye/etc/docker_debian_ts
 
 # minimize
 rm -rf chroot-bullseye/var/cache/apt/*
