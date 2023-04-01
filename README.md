@@ -16,7 +16,7 @@ FROM ghcr.io/simgel/dkr-debian-base:bullseye
 
 ## Optimizations
 
-The image contains a random (unique id). Any Images derived from this base image can use this ID to identify updates of this image.
+The image contains a random/unique ID. Any Images derived from this base image can use this ID to identify updates of this image.
 
 ```sh
 cat /opt/dkr-image/simgel/dkr-debian-base.id
