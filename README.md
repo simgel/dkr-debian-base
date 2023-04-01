@@ -18,8 +18,10 @@ FROM ghcr.io/simgel/dkr-debian-base:bullseye
 
 The image contains a random (unique id). Any Images derived from this base image can use this ID to identify updates of this image.
 
-```bash
+```sh
 cat /opt/dkr-image/simgel/dkr-debian-base.id
+
+docker run --rm ghcr.io/simgel/dkr-debian-base:bullseye cat /opt/dkr-image/simgel/dkr-debian-base.id
 ```
 
 ## License
