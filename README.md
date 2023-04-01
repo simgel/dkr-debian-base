@@ -1,8 +1,6 @@
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
+![GitHub](https://img.shields.io/github/license/simgel/dkr-debian-base?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/simgel/dkr-debian-base?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/simgel/dkr-debian-base?style=for-the-badge)
 
 ## About
 
