@@ -26,7 +26,7 @@ docker run --rm ghcr.io/simgel/dkr-debian-base:bullseye cat /opt/dkr-image/simge
 
 ### Mirror
 
-Apt uses a faster mirror from leaseweb: `http://mirror.leaseweb.net/debian` 
+APT uses a faster mirror from leaseweb: `http://mirror.leaseweb.net/debian` 
 
 ### DNS
 
