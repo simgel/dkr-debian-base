@@ -11,7 +11,7 @@ echo "deb http://mirror.de.leaseweb.net/debian bullseye-updates main contrib" >>
 # install debootstrap
 apt update -qq
 apt upgrade -qqy
-apt install -qqy debootstrap
+apt install -qqy debootstrap bsdmainutils
 
 
 # create base layout
@@ -30,6 +30,7 @@ echo "deb http://mirror.de.leaseweb.net/debian bullseye-updates main contrib" >>
 
 chroot chroot-bullseye apt update -qq
 chroot chroot-bullseye apt upgrade -qqy
+chroot chroot-bullseye apt install -qqy bsdmainutils
 
 date -R > chroot-bullseye/etc/docker_debian_ts
 chmod 644 chroot-bullseye/etc/docker_debian_ts
