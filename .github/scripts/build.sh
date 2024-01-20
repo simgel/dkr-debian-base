@@ -21,9 +21,9 @@ cleanup() {
 
     rm -f build.log
     rm -f prepare.log
-    rm -f bullseye.tar
+    rm -f bookworm.tar
 
-    ( docker rmi ghcr.io/simgel/dkr-debian-base:bullseye >> /dev/null )
+    ( docker rmi ghcr.io/simgel/dkr-debian-base:bookworm >> /dev/null )
 
     exit $rv
 }
@@ -32,7 +32,7 @@ trap cleanup EXIT
 
 
 # BUILD --------------
-IMAGE="ghcr.io/simgel/dkr-debian-base:bullseye"
+IMAGE="ghcr.io/simgel/dkr-debian-base:bookworm"
 
 ( echo "${SCR_GIT_TOKEN}" | docker login -u ${GITHUB_ACTOR} --password-stdin ghcr.io ) || exit 1
 
@@ -81,7 +81,7 @@ BIID=$(cat build.iid)
 BCID=$(cat build.cid)
 
 echo ">> fetching base image tar..."
-( docker cp "$BCID:/docker/debian/bullseye.tar" "./" >>build.log 2>&1 ) || exit 1
+( docker cp "$BCID:/docker/debian/bookworm.tar" "./" >>build.log 2>&1 ) || exit 1
 
 
 rm build.iid build.cid >>build.log 2>&1
@@ -92,5 +92,5 @@ docker rmi "$BIID" >>build.log 2>&1
 
 # create container
 
-( docker import --change "CMD /bin/bash" bullseye.tar "$IMAGE" ) || exit 1
+( docker import --change "CMD /bin/bash" bookworm.tar "$IMAGE" ) || exit 1
 ( docker push "$IMAGE" ) || exit 1
