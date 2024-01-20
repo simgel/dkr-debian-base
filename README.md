@@ -10,7 +10,7 @@ The uncompressed image is `~80MB`  in size.
 ## Usage
 
 ```Dockerfile
-FROM ghcr.io/simgel/dkr-debian-base:bullseye
+FROM ghcr.io/simgel/dkr-debian-base:bookworm
 ```
 
 
@@ -21,7 +21,7 @@ The image contains a random/unique ID. Any Images derived from this base image c
 ```sh
 cat /opt/dkr-image/simgel/dkr-debian-base.id
 
-docker run --rm ghcr.io/simgel/dkr-debian-base:bullseye cat /opt/dkr-image/simgel/dkr-debian-base.id
+docker run --rm ghcr.io/simgel/dkr-debian-base:bookworm cat /opt/dkr-image/simgel/dkr-debian-base.id
 ```
 
 ### Mirror
